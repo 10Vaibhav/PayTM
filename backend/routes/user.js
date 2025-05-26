@@ -1,12 +1,30 @@
 import { Router } from "express";
 import User from "../db";
 import bcrypt from "bcrypt"
+import zod from "zod";
+import jwt from "jsonwebtoken";
+import JWT_SECRET from "../config.js"
 
 const router = Router();
+
+const signupSchema = zod.object({
+  username: zod.string(),
+  password: zod.string(),
+  firstName: zod.string(),
+  lastName: zod.string()
+});
 
 router.post("/signup", async (req, res) => {
   try {
     const {username, password, firstName, lastName} = req.body;
+
+    const {success} = signupSchema.safeParse(req.body);
+
+    if(!success){
+      return res.json({
+        message: "Incorrect inputs",
+      });
+    }
 
     if (!username || !password || !firstName || !lastName) {
     return res.status(400).json({
@@ -31,10 +49,15 @@ router.post("/signup", async (req, res) => {
         lastName
     });
 
+    const token = jwt.sign({
+      userId: user._id
+    },JWT_SECRET);
+
     return res.status(201).json({
-        message: "Signup Successfully !!",
+        message: "Signup Successfully, User is Created !!",
         userId: user._id,
-        username: user.username
+        username: user.username,
+        token: token
     });
 
   } catch (error) {
