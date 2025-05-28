@@ -32,7 +32,6 @@ A simplified version of PayTM built as a learning project to understand digital 
 - Account creation and management
 - Balance checking
 - Money transfer between users
-- Transaction history
 - Secure transaction processing
 
 
