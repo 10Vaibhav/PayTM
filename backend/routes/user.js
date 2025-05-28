@@ -79,6 +79,8 @@ router.post("/signup", async (req, res) => {
       message: "Signup Successfully, User is Created !!",
       userId: user._id,
       username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
       token: token,
     });
   } catch (error) {
@@ -125,6 +127,8 @@ router.post("/signin", async (req, res) => {
 
     return res.status(200).json({
       message: "signin successfully!!",
+      firstName: user.firstName,
+      lastName: user.lastName,
       token: token,
     });
   } catch (error) {
@@ -193,5 +197,25 @@ router.get("/bulk", async (req, res) => {
     })),
   });
 });
+
+router.get("/me", authMiddleware, async (req, res) => {
+
+  const userId = req.userId;
+
+  const user = await User.findOne({_id: userId});
+
+  if(!user){
+    return res.status(401).json({
+      message: 'user not found!'
+    })
+  }
+
+  return res.status(200).json({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username
+  })
+
+})
 
 export default router;

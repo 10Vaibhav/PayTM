@@ -4,6 +4,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Dashboard from './pages/Dashboard';
 import SendMoney from './pages/SendMoney';
+import Profile from './pages/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -23,6 +24,11 @@ function App() {
           <Route path='/send' element={
             <ProtectedRoute>
               <SendMoney/>
+            </ProtectedRoute>
+          }/>
+          <Route path='/profile' element={
+            <ProtectedRoute>
+              <Profile/>
             </ProtectedRoute>
           }/>
         </Routes>
