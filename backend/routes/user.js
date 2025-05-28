@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User } from "../db.js";
+import { Account, User } from "../db.js";
 import bcrypt from "bcrypt";
 import zod from "zod";
 import jwt from "jsonwebtoken";
@@ -59,6 +59,13 @@ router.post("/signup", async (req, res) => {
       password: hashedPassword,
       username,
       lastName,
+    });
+
+    const userId = user._id;
+
+    await Account.create({
+      userId,
+      balance: 1 + Math.random() * 10000,
     });
 
     const token = jwt.sign(
@@ -136,41 +143,55 @@ router.put("/", authMiddleware, async (req, res) => {
     });
   }
 
-  await User.updateOne({ _id: req.userId }, req.body);
+  try {
+    // Create update object
+    const updateData = { ...req.body };
 
-  return res.json({
-    message: "Updated Successfully"
-  })
+    // If password is being updated, hash it
+    if (updateData.password) {
+      const saltRounds = 10;
+      updateData.password = await bcrypt.hash(updateData.password, saltRounds);
+    }
 
+    await User.updateOne({ _id: req.userId }, updateData);
+
+    return res.json({
+      message: "Updated Successfully",
+    });
+  } catch (error) {
+    console.error("Update error:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 });
 
-router.get("/bulk", async(req, res)=> {
+router.get("/bulk", async (req, res) => {
   const filter = req.query.filter || "";
 
   const users = await User.find({
     $or: [
       {
         firstName: {
-          "$regex": filter
-        }
-      },{
+          $regex: filter,
+        },
+      },
+      {
         lastName: {
-          "$regex": filter
-        }
-      }
-    ]
+          $regex: filter,
+        },
+      },
+    ],
   });
 
   res.json({
-    user: users.map(user => ({
+    user: users.map((user) => ({
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
-      _id: user._id
-    }))
+      _id: user._id,
+    })),
   });
-
 });
-
 
 export default router;
