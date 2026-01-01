@@ -2,7 +2,7 @@
 
 A simplified version of PayTM built as a learning project to understand digital transactions, payment processing.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React.js (v19) - Modern UI library
@@ -20,7 +20,7 @@ A simplified version of PayTM built as a learning project to understand digital 
 - CORS - Cross-origin resource sharing
 - dotenv - Environment variable management
 
-## ✨ Features
+## Features
 
 ### User Management
 - User registration and authentication
@@ -35,7 +35,7 @@ A simplified version of PayTM built as a learning project to understand digital 
 - Secure transaction processing
 
 
-## 🎯 Learning Objectives
+## Learning Objectives
 This project was built with the following learning goals:
 - Understanding digital payment systems
 - Implementing secure transaction processing
@@ -43,7 +43,7 @@ This project was built with the following learning goals:
 - Working with databases and API design
 - Building responsive and user-friendly interfaces
 
-## 🔒 Security Features
+## Security Features
 - Password hashing using bcrypt
 - JWT-based authentication
 - Input validation using Zod
@@ -51,8 +51,8 @@ This project was built with the following learning goals:
 - CORS protection
 - Environment variable management
 
-## 🤝 Contributing
+## Contributing
 Feel free to fork this project and experiment with it. This is a learning project, so contributions and suggestions are welcome!
 
-## 📝 License
+## License
 This project is open source and available under the MIT License.
