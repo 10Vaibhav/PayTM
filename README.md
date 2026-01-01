@@ -1,6 +1,6 @@
 # PayTM - Learning Project
 
-A simplified version of PayTM built as a learning project to understand digital transactions, payment processing, and full-stack development.
+A simplified version of PayTM built as a learning project to understand digital transactions, payment processing.
 
 ## 🚀 Tech Stack
 
@@ -32,7 +32,6 @@ A simplified version of PayTM built as a learning project to understand digital 
 - Account creation and management
 - Balance checking
 - Money transfer between users
-- Transaction history
 - Secure transaction processing
 
 
@@ -40,7 +39,6 @@ A simplified version of PayTM built as a learning project to understand digital 
 This project was built with the following learning goals:
 - Understanding digital payment systems
 - Implementing secure transaction processing
-- Learning full-stack development with modern tools
 - Practicing authentication and authorization
 - Working with databases and API design
 - Building responsive and user-friendly interfaces
