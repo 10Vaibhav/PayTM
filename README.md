@@ -1,4 +1,4 @@
-# PayTM - Learning Project
+# PayTM 
 
 A simplified version of PayTM built as a learning project to understand digital transactions, payment processing.
 
